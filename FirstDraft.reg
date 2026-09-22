@@ -1,0 +1,41 @@
+Windows Registry Editor Version 5.00
+
+; ============================
+; 1) Disable Microsoft 365 Copilot in Office apps
+; ============================
+
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Office\16.0\Common]
+"CopilotEnabled"=dword:00000000
+"EnableCopilot"=dword:00000000
+"EnableSmartServices"=dword:00000000
+"DisableContentInsights"=dword:00000001
+
+; Extra hardening for modern Copilot UI (Hydra-style controls)
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Office\16.0\Common\officeai]
+"TurnOffCallout"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Cloud\Office\16.0\Common\copilot]
+"CopilotPinning"=dword:00000000
+"PinningStateforCopilotApp"=dword:00000000
+
+; ============================
+; 2) Disable Copilot and AI surfaces in Microsoft Edge
+; ============================
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
+"HubsSidebarEnabled"=dword:00000000
+"CopilotEnabled"=dword:00000000
+"ShowCopilotButton"=dword:00000000
+"WebWidgetAllowed"=dword:00000000
+
+; Optional: block Copilot installation via Edge Update (Windows 11 only, harmless on 10)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\EdgeUpdate]
+"Install {C50565E9-CCCF-44B4-BA15-5AC5C6569197}"=dword:00000000
+
+; ============================
+; 3) Disable Windows cloud / AI suggestions
+; ============================
+
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CloudContent]
+"DisableWindowsSpotlightFeatures"=dword:00000001
+"DisableTailoredExperiencesWithDiagnosticData"=dword:00000001
